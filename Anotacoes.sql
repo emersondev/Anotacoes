@@ -2377,3 +2377,139 @@ WHERE (C.SEXO = 'F'
 	AND E.ESTADO = 'SP')
 ORDER BY C.NOME ASC; /* ASC E PRA ORDERNAR CRESCENTE E DESC PARA DECRESCENTE */
 
+/* nome, email, numero, estado */
+SELECT C.NOME, C.EMAIL, E.ESTADO, T.NUMERO
+FROM CLIENTE C
+	LEFT JOIN ENDERECO E
+	ON C.IDCLIENTE = E.ID_CLIENTE
+	LEFT JOIN TELEFONE T
+	ON C.IDCLIENTE = T.ID_CLIENTE;
+
++---------+-------------------+--------+----------+
+| NOME    | EMAIL             | ESTADO | NUMERO   |
++---------+-------------------+--------+----------+
+| JOAO    | JOAO@IG.COM       | RJ     | 87866896 |
+| JOAO    | JOAO@IG.COM       | RJ     | 99667587 |
+| JOAO    | JOAO@IG.COM       | RJ     | 66687899 |
+| CARLOS  | CARLOS@IG.COM     | NULL   | 54768899 |
+| CARLOS  | CARLOS@IG.COM     | NULL   | 88687909 |
+| ANA     | ANA@IG.COM        | SP     | 78989765 |
+| ANA     | ANA@IG.COM        | SP     | 99766676 |
+| CLARA   | NULL              | MG     | NULL     |
+| JORGE   | JORGE@IG.COM      | ES     | 78458743 |
+| JORGE   | JORGE@IG.COM      | ES     | 56576876 |
+| JORGE   | JORGE@IG.COM      | ES     | 89986668 |
+| CELIA   | CELIA@IG.COM      | RJ     | NULL     |
+| PAULA   | NULL              | RJ     | NULL     |
+| FLAVIO  | FLAVIO@IG.COM     | MG     | 44522578 |
+| ANDRE   | ANDRE@GLOBO.COM   | RJ     | 68976565 |
+| ANDRE   | ANDRE@GLOBO.COM   | RJ     | 99656675 |
+| GIOVANA | NULL              | RJ     | NULL     |
+| KARLA   | KARLA@GMAIL.COM   | RJ     | 33567765 |
+| KARLA   | KARLA@GMAIL.COM   | RJ     | 88668786 |
+| KARLA   | KARLA@GMAIL.COM   | RJ     | 55689654 |
+| DANIELE | DANIELE@GMAIL.COM | ES     | 88687979 |
+| LORENA  | NULL              | RJ     | 88965676 |
+| EDUARDO | NULL              | PR     | NULL     |
+| ANTONIO | ANTONIO@IG.COM    | SP     | 89966809 |
+| ANTONIO | ANTONIO@UOL.COM   | PR     | 88679978 |
+| ELAINE  | ELAINE@GLOBO.COM  | SP     | 99655768 |
+| CARMEM  | CARMEM@IG.COM     | RJ     | 89955665 |
+| ADRIANA | ADRIANA@GMAIL.COM | RJ     | 77455786 |
+| ADRIANA | ADRIANA@GMAIL.COM | RJ     | 89766554 |
+| JOICE   | JOICE@GMAIL.COM   | RJ     | 77755785 |
++---------+-------------------+--------+----------+
+
+/* FUNCAO IFNULL() */
+
+SELECT C.NOME,
+	   IFNULL(C.EMAIL, 'NAO TEM EMAIL'),
+	   E.ESTADO,
+	   T.NUMERO
+FROM CLIENTE C
+	LEFT JOIN ENDERECO E
+	ON C.IDCLIENTE = E.ID_CLIENTE
+	LEFT JOIN TELEFONE T
+	ON C.IDCLIENTE = T.ID_CLIENTE;
+
+/* ELA APARECE NO CABECALHO */
++---------+----------------------------------+--------+----------+
+| NOME    | IFNULL(C.EMAIL, 'NAO TEM EMAIL') | ESTADO | NUMERO   |
++---------+----------------------------------+--------+----------+
+| JOAO    | JOAO@IG.COM                      | RJ     | 87866896 |
+| JOAO    | JOAO@IG.COM                      | RJ     | 99667587 |
+| JOAO    | JOAO@IG.COM                      | RJ     | 66687899 |
+| CARLOS  | CARLOS@IG.COM                    | NULL   | 54768899 |
+| CARLOS  | CARLOS@IG.COM                    | NULL   | 88687909 |
+| ANA     | ANA@IG.COM                       | SP     | 78989765 |
+| ANA     | ANA@IG.COM                       | SP     | 99766676 |
+| CLARA   | NAO TEM EMAIL                    | MG     | NULL     |
+| JORGE   | JORGE@IG.COM                     | ES     | 78458743 |
+| JORGE   | JORGE@IG.COM                     | ES     | 56576876 |
+| JORGE   | JORGE@IG.COM                     | ES     | 89986668 |
+| CELIA   | CELIA@IG.COM                     | RJ     | NULL     |
+| PAULA   | NAO TEM EMAIL                    | RJ     | NULL     |
+| FLAVIO  | FLAVIO@IG.COM                    | MG     | 44522578 |
+| ANDRE   | ANDRE@GLOBO.COM                  | RJ     | 68976565 |
+| ANDRE   | ANDRE@GLOBO.COM                  | RJ     | 99656675 |
+| GIOVANA | NAO TEM EMAIL                    | RJ     | NULL     |
+| KARLA   | KARLA@GMAIL.COM                  | RJ     | 33567765 |
+| KARLA   | KARLA@GMAIL.COM                  | RJ     | 88668786 |
+| KARLA   | KARLA@GMAIL.COM                  | RJ     | 55689654 |
+| DANIELE | DANIELE@GMAIL.COM                | ES     | 88687979 |
+| LORENA  | NAO TEM EMAIL                    | RJ     | 88965676 |
+| EDUARDO | NAO TEM EMAIL                    | PR     | NULL     |
+| ANTONIO | ANTONIO@IG.COM                   | SP     | 89966809 |
+| ANTONIO | ANTONIO@UOL.COM                  | PR     | 88679978 |
+| ELAINE  | ELAINE@GLOBO.COM                 | SP     | 99655768 |
+| CARMEM  | CARMEM@IG.COM                    | RJ     | 89955665 |
+| ADRIANA | ADRIANA@GMAIL.COM                | RJ     | 77455786 |
+| ADRIANA | ADRIANA@GMAIL.COM                | RJ     | 89766554 |
+| JOICE   | JOICE@GMAIL.COM                  | RJ     | 77755785 |
++---------+----------------------------------+--------+----------+
+
+/* FACO UM ALIAS PARA ESCONDER O CABECALHO */
+SELECT C.NOME,
+	   IFNULL(C.EMAIL, 'NAO TEM EMAIL') AS 'E-MAIL',
+	   E.ESTADO,
+	   T.NUMERO
+FROM CLIENTE C
+	LEFT JOIN ENDERECO E
+	ON C.IDCLIENTE = E.ID_CLIENTE
+	LEFT JOIN TELEFONE T
+	ON C.IDCLIENTE = T.ID_CLIENTE;
+
++---------+-------------------+--------+----------+
+| NOME    | E-MAIL            | ESTADO | NUMERO   |
++---------+-------------------+--------+----------+
+| JOAO    | JOAO@IG.COM       | RJ     | 87866896 |
+| JOAO    | JOAO@IG.COM       | RJ     | 99667587 |
+| JOAO    | JOAO@IG.COM       | RJ     | 66687899 |
+| CARLOS  | CARLOS@IG.COM     | NULL   | 54768899 |
+| CARLOS  | CARLOS@IG.COM     | NULL   | 88687909 |
+| ANA     | ANA@IG.COM        | SP     | 78989765 |
+| ANA     | ANA@IG.COM        | SP     | 99766676 |
+| CLARA   | NAO TEM EMAIL     | MG     | NULL     |
+| JORGE   | JORGE@IG.COM      | ES     | 78458743 |
+| JORGE   | JORGE@IG.COM      | ES     | 56576876 |
+| JORGE   | JORGE@IG.COM      | ES     | 89986668 |
+| CELIA   | CELIA@IG.COM      | RJ     | NULL     |
+| PAULA   | NAO TEM EMAIL     | RJ     | NULL     |
+| FLAVIO  | FLAVIO@IG.COM     | MG     | 44522578 |
+| ANDRE   | ANDRE@GLOBO.COM   | RJ     | 68976565 |
+| ANDRE   | ANDRE@GLOBO.COM   | RJ     | 99656675 |
+| GIOVANA | NAO TEM EMAIL     | RJ     | NULL     |
+| KARLA   | KARLA@GMAIL.COM   | RJ     | 33567765 |
+| KARLA   | KARLA@GMAIL.COM   | RJ     | 88668786 |
+| KARLA   | KARLA@GMAIL.COM   | RJ     | 55689654 |
+| DANIELE | DANIELE@GMAIL.COM | ES     | 88687979 |
+| LORENA  | NAO TEM EMAIL     | RJ     | 88965676 |
+| EDUARDO | NAO TEM EMAIL     | PR     | NULL     |
+| ANTONIO | ANTONIO@IG.COM    | SP     | 89966809 |
+| ANTONIO | ANTONIO@UOL.COM   | PR     | 88679978 |
+| ELAINE  | ELAINE@GLOBO.COM  | SP     | 99655768 |
+| CARMEM  | CARMEM@IG.COM     | RJ     | 89955665 |
+| ADRIANA | ADRIANA@GMAIL.COM | RJ     | 77455786 |
+| ADRIANA | ADRIANA@GMAIL.COM | RJ     | 89766554 |
+| JOICE   | JOICE@GMAIL.COM   | RJ     | 77755785 |
++---------+-------------------+--------+----------+
