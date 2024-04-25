@@ -2730,3 +2730,26 @@ SHOW TABLES;
 SELECT * FROM V_RELATORIO
 ORDER BY 1;
 
+/* DELIMITADOR */
+
+STATUS
+/*
+Connection id:          3
+Current database:       comercio  ------> qual banco eu to 
+Current user:           root@localhost
+SSL:                    Not in use
+Using delimiter:        ; -----> delimitador
+Server version:         5.7.20-log MySQL Community Server (GPL)
+Protocol version:       10
+Connection:             localhost via TCP/IP
+Server characterset:    utf8
+Db     characterset:    utf8
+Client characterset:    utf8
+Conn.  characterset:    utf8
+TCP port:               3306
+Uptime:                 34 min 2 sec ------> quanto tempo tá em pé meu banco
+*/ 
+
+/* CUIDADO AO TROCAR O DELIMITER POIS ELE CONSIDERA OS ESPAÇOS ENTRE O DELIMITADOR 
+ AO FECHAR O BANCO, O DELIMITER VOLTA AO NORMAL */
+DELIMITER $
