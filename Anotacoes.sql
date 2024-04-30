@@ -3104,15 +3104,15 @@ DROP FOREIGN KEY FK_CLIENTE_TELEFONE;
 ALTER TABLE TELEFONE ADD CONSTRAINT FK_CLIENTE_TELEFONE
 FOREIGN KEY(ID_CLIENTE) REFERENCES CLIENTE(IDCLIENTE); 
 
-/* CORRECAO EX 01 */
 
-CREATE DATABASE PROJETO; --> JÁ EXISTE
+/*
+Exercícios de fixação.
+1) Crie um banco de dados chamado projeto e conecte-se ao banco.
+2) Faça a seguinte modelagem:
+Sr. José quer modernizar a sua oficina, e por enquanto, cadastrar os carros que entram para realizar serviços e os seus respectivos donos. Sr. José mencionou que cada cliente possui apenas um carro. Um carro possui uma marca. Sr. José também quer saber as cores dos carros para ter idéia de qual tinta comprar, e informa que um carro pode ter mais de uma cor. Sr José necessita armazenar os telefones dos clientes, mas não quer que eles sejam obrigatórios. 
+CORRECAO EX 01 */
 
-USE PROJETO;
+CREATE DATABASE OFICINA;
 
-CREATE TABLE CLIENTE(
-	IDCLIENTE INT PRIMARY KEY AUTO_INCREMENT,
-	NOME VARCHAR(30) NOT NULL,
-	SEXO ENUM('M','F') NOT NULL,
-	ID_CARRO INT UNIQUE
-);
+USE OFICINA;
+
